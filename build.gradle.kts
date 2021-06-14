@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.anatawa12.auto-tostring"
-version = "1.0.2-SNAPSHOT"
+version = property("version")!!
 
 repositories {
     mavenCentral()
