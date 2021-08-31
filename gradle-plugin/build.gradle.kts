@@ -1,24 +1,13 @@
 import com.anatawa12.compileTimeConstant.CreateConstantsTask
 
-buildscript {
-    repositories {
-        mavenCentral()
-    }
-
-    dependencies {
-        classpath("com.anatawa12:compile-time-constant:1.0.2")
-    }
-}
-
 plugins {
     id("com.gradle.plugin-publish") version "0.14.0"
+    id("com.anatawa12.compile-time-constant") version "1.0.2"
     kotlin("kapt")
     `kotlin-dsl`
     `java-gradle-plugin`
     `maven-publish`
 }
-
-apply(plugin = "com.anatawa12.compile-time-constant")
 
 group = project(":").group
 version = project(":").version
