@@ -15,6 +15,7 @@ plugins {
     kotlin("kapt")
     `kotlin-dsl`
     `java-gradle-plugin`
+    `maven-publish`
 }
 
 apply(plugin = "com.anatawa12.compile-time-constant")
@@ -33,6 +34,8 @@ dependencies {
 }
 
 gradlePlugin {
+    isAutomatedPublishing = false
+
     plugins {
         register("auto-tostring") {
             displayName = "Auto toString"
@@ -68,15 +71,12 @@ createCompileTimeConstant.apply {
 tasks.compileKotlin.get().dependsOn(createCompileTimeConstant)
 tasks.compileKotlin.get().kotlinOptions.freeCompilerArgs = listOf("-XXLanguage:+TrailingCommas")
 
-apply(from = "${rootProject.projectDir}/gradle-scripts/publish-to-central-java.gradle.kts")
+publishing.publications.create<MavenPublication>("maven") {
+    from(components["java"])
+    configurePom()
+}
 
-tasks.withType<PublishToMavenRepository>().configureEach {
-    onlyIf {
-        if (repository.name == "mavenCentral") {
-            publication.name != "auto-tostringPluginMarkerMaven"
-                    && publication.name != "pluginMaven"
-        } else {
-            true
-        }
-    }
+java {
+    withSourcesJar()
+    withJavadocJar()
 }

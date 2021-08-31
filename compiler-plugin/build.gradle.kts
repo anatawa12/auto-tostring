@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     kotlin("jvm")
     kotlin("kapt")
+    `maven-publish`
 }
 
 group = project(":").group
@@ -39,4 +40,13 @@ tasks.withType<Test> {
     useJUnitPlatform()
 }
 
-apply(from = "${rootProject.projectDir}/gradle-scripts/publish-to-central-java.gradle.kts")
+
+publishing.publications.create<MavenPublication>("maven") {
+    from(components["java"])
+    configurePom()
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
