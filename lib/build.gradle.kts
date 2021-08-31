@@ -20,7 +20,6 @@ kotlin {
         }
     }
     js(IR) {
-        browser()
         nodejs()
     }
     val hostOs = System.getProperty("os.name")
@@ -80,6 +79,12 @@ tasks.withType<org.jetbrains.kotlin.gradle.dsl.KotlinCompile<*>>() {
         freeCompilerArgs = listOf(
             "-Xopt-in=kotlin.RequiresOptIn"
         )
+    }
+}
+
+val compileKotlinJs by tasks.getting(org.jetbrains.kotlin.gradle.tasks.Kotlin2JsCompile::class) {
+    if (this.kotlinOptions.outputFile.let { it != null && !it.endsWith(".js") }) {
+        this.kotlinOptions.outputFile = "${this.kotlinOptions.outputFile}.js"
     }
 }
 

@@ -16,7 +16,6 @@ import org.junit.jupiter.api.Assertions.fail
 import java.net.URLClassLoader
 import java.nio.file.Files
 import java.nio.file.Paths
-import kotlin.io.path.name
 
 
 class RendererMappingReplacer(
@@ -84,6 +83,7 @@ object DebuggingDiagnosticFactoryToRendererMapFactory {
 
     private class DiagnosticRendererImpl() : DiagnosticRenderer<UnboundDiagnostic> {
         override fun render(diagnostic: UnboundDiagnostic): String = diagnostic.factory.name
+        override fun renderParameters(diagnostic: UnboundDiagnostic): Array<out Any?> = arrayOf()
     }
 }
 
