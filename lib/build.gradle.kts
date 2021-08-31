@@ -20,7 +20,6 @@ kotlin {
         }
     }
     js(IR) {
-        browser()
         nodejs()
     }
     val hostOs = System.getProperty("os.name")
