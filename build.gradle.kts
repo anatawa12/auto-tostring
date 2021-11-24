@@ -16,3 +16,12 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
 }
+
+allprojects {
+    afterEvaluate {
+        java {
+            targetCompatibility = JavaVersion.VERSION_1_8
+            sourceCompatibility = JavaVersion.VERSION_1_8
+        }
+    }
+}
