@@ -58,7 +58,10 @@ createCompileTimeConstant.apply {
 }
 
 tasks.compileKotlin.get().dependsOn(createCompileTimeConstant)
-tasks.compileKotlin.get().kotlinOptions.freeCompilerArgs = listOf("-XXLanguage:+TrailingCommas")
+
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    kotlinOptions.languageVersion = "1.4"
+}
 
 publishing.publications.create<MavenPublication>("maven") {
     from(components["java"])
