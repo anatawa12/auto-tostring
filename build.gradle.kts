@@ -2,7 +2,7 @@ plugins {
     kotlin("jvm") version "1.6.0"
     kotlin("multiplatform") version "1.6.0" apply false
     kotlin("plugin.allopen") version "1.6.0" apply false
-    id("org.jetbrains.intellij") version "1.3.0" apply false
+    id("org.jetbrains.intellij") version "1.5.1" apply false
     id("com.github.johnrengelman.shadow") version "6.1.0" apply false
 }
 
